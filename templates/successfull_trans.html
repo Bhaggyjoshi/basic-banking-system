@@ -1,0 +1,38 @@
+<script>
+
+    setTimeout(function(){
+       window.location.href = '/transactions';
+    }, 4000);
+ </script>
+ <div class="transi">
+    <h1>Transaction Successfull ...!</h1>
+
+    <h4>You will be redirected to transaction history in 5 sec.</h4>
+ </div>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #14568b;
+    }
+    
+    .transi{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .transi h1, h4{
+        background-color: #0563af;
+        color:white;
+        padding: 12px;
+        width: 250px;
+        border: none;
+        font-size: 20px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+        -webkit-appearance: button;
+        appearance: button;
+        outline: none;
+    }
+</style>

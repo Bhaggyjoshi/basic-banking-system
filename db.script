@@ -1,0 +1,41 @@
+#These are the SQL scripts for creating database and tables with content for this project.
+
+
+
+create database bank;
+use bank;
+# create table
+drop table customers;
+drop table transactions;
+
+create table customers(
+	id int primary key  not null auto_increment,
+    firstName varchar(20) NOT NULL,
+    lastName varchar(20) NOT NULL,
+    accountNo int unique ,
+    email text NOT NULL,
+    balance int NOT NULL
+);
+
+insert into customers(firstName, lastName, accountNo, email, balance) values ( 'raulye', 'karmore', 101, 'rahulk@gmail.com', 25000);
+insert into customers(firstName, lastName, accountNo, email, balance) values ( 'pavan', 'shaha', 102, 'pavan@gmail.com', 20000);
+insert into customers(firstName, lastName, accountNo, email, balance) values ( 'alice', 'bob', 103, 'alice@gmail.com', 21000);
+insert into customers(firstName, lastName, accountNo, email, balance) values ( 'hannah', 'wells', 104, 'hannahw@gmail.com', 21000);
+insert into customers(firstName, lastName, accountNo, email, balance) values ( 'kapil', 'sharma', 105, 'kapils@gmail.com', 2200);
+insert into customers(firstName, lastName, accountNo, email, balance) values ( 'ram', 'apte', 106, 'rama@gmail.com', 24536);
+insert into customers(firstName, lastName, accountNo, email, balance) values ( 'shyam', 'tilak', 107, 'shyat@gmail.com', 41200);
+insert into customers(firstName, lastName, accountNo, email, balance) values ( 'avinash', 'tambe', 108, 'avinasht@gmail.com', 5000);
+insert into customers(firstName, lastName, accountNo, email, balance) values ( 'pragti', 'pawar', 109, 'pragtp@gmail.com', 45241);
+insert into customers(firstName, lastName, accountNo, email, balance) values ( 'rupali', 'hire', 110, 'rupalih@gmail.com', 45241); 
+
+create table transactions (
+	id int auto_increment not null,    
+    from_cust int not null,    
+    to_cust int not null,    
+    amount int not null,    
+    datetime datetime,    
+    primary key (id),    
+    INDEX(from_cust, to_cust),    
+    foreign key (from_cust) references customers(accountNo),    
+    foreign key (to_cust) references customers(accountNo)
+);

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../static/customer.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer </title>
+</head>
+<body>
+    <div id="navi">
+        <nav class="navbar navbar-dark bg-dark ">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                    <a class="navbar-brand" href="#">
+                         <i class="fas fa-university"> LBS</i></a>
+                  </div>
+                  <ul class="nav navbar-nav menu-effect">
+                    <li class="active"><a href="/">Home</a></li>
+                    <!-- <li><a href="html/customer.html">Customers</a></li>
+                    <li><a href="html/transaction.html">Transfer History</a></li>
+                    <li><a href="html/transfer.html">Payment</a></li>
+                   -->
+                   <li><a href="/customers">Customers</a></li>
+                    <li><a href="/transactions">Transfer History</a></li>
+                    <li><a href="/transfer">Payment</a></li>
+                  
+                  </ul>
+                </div>
+          </nav>
+    </div>
+    <div class="container">
+        <div class="customer_info">
+            <table>
+                <tr>
+                   <th colspan="2" style="text-align: center;">Customer Information</th>
+                    
+                </tr>
+                    {% for item in data %}
+        
+                    <tr>
+                        <td>Customer Name</td>
+                        <td>  {{item[1]}} {{item[2]}}</td>
+                    </tr>
+                    <tr>
+                        <td>Account No</td>
+                        <td>{{item[3]}}</td>
+                    </tr>
+                    <tr>
+                        <td>E-mail</td>
+                        <td>{{item[4]}}</td>
+                    </tr>
+                    <tr>
+                        <td>Balance</td>
+                        <td>{{item[5]}}</td>
+                    </tr>
+                    
+                    {% endfor %}
+                    
+              </table>
+        </div>
+    </div>
+
+    <div class="transfer">
+        <button class="trans-btn" onclick=Transfer({{data[0][3]|tojson}})>Transfer</button>
+    </div>
+
+<p id="payment_window"></p>
+
+<script>
+    var down = document.getElementById("payment_window");
+
+    function deleteTransForm(){
+        var trans_form = document.getElementById('trans_divi');
+        trans_form.remove();
+        
+    }
+
+    function Transfer(acc_nummber) {
+        // console.log(acc_nummber);
+        // Create a form synamically
+        var div_form = document.createElement("div")
+        div_form.setAttribute("class", "trans_div");
+        div_form.setAttribute("id", "trans_divi");
+
+        var form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", "/transfer_money");
+        form.setAttribute("class", "trans_form");
+
+        // Create an input element for From account 
+        var ID = document.createElement("input");
+        ID.setAttribute("type", "text");
+        ID.setAttribute("name", "from_ac");
+        ID.setAttribute("placeholder", "From a/c number");
+        ID.setAttribute("value",acc_nummber );
+
+         
+        
+         // Create an input element for to account
+        var to_ac = document.createElement("input");
+        to_ac.setAttribute("type", "text");
+        to_ac.setAttribute("name", "to_ac");
+        to_ac.setAttribute("placeholder", "To a/c number"); 
+        to_ac.setAttribute("required", true)
+
+        // Create an input element for amount
+        var amount = document.createElement("input");
+        amount.setAttribute("type", "text");
+        amount.setAttribute("name", "amount");
+        amount.setAttribute("placeholder", "Enter amount"); 
+        amount.setAttribute("required", true)
+
+        // Create a submit button
+        var s = document.createElement("input");
+        s.setAttribute("type", "submit");
+        s.setAttribute("value", "Submit");
+
+        // Create a submit button
+        var cancel = document.createElement("input");
+        cancel.setAttribute("class", "cancel");
+        cancel.setAttribute("type", "button");
+        cancel.setAttribute("value", "Cancel");
+        cancel.setAttribute("onclick", "deleteTransForm()");
+        
+
+        // Append the from_Ac input to the form
+        form.append(ID); 
+        
+        // Append the to_ac to the form
+        form.append(to_ac);
+        
+        // Append the amount to form
+        form.append(amount);
+        
+        // Append the button to the form
+        form.append(s); 
+        form.append(cancel);
+
+        div_form.append(form)
+
+        document.getElementsByTagName("body")[0]
+       .appendChild(div_form);
+    }
+</script>
+
+</body>
+</html>

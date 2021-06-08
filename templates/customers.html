@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/customers.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers</title>
+</head>
+<body>
+    <div id="navi">
+        <nav class="navbar navbar-dark bg-dark ">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                    <a class="navbar-brand" href="#">
+                         <i class="fas fa-university"> LBS</i></a>
+                  </div>
+                  <ul class="nav navbar-nav menu-effect">
+                    <!-- <li class="active"><a href="../index.html">Home</a></li>
+                    <li><a href="transaction.html">Transfer History</a></li>
+                    <li><a href="transfer.html">Payment</a></li> -->
+
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/transactions">Transfer History</a></li>
+                    <li><a href="/transfer">Payment</a></li>
+                    
+                  </ul>
+                </div>
+          </nav>
+    </div>
+    <div class="table">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Customer Name</th>
+                    <th>Account No</th>
+                    <th>Email</th>
+                    <th>Balance</th>
+                    <th>View</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+            <tr>
+                <td>{{item[0]}}</td>
+                <td>{{item[1]}} {{item[2]}}</td>
+                <td>{{item[3]}}</td>
+                <td>{{item[4]}}</td>
+                <td>{{item[5]}}</td>
+                <td><a href="/customer/{{item[3]}}"><input type="button" value="Details"/></a></td>
+            </tr>
+
+{% endfor %}
+                
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
